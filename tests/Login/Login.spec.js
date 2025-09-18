@@ -1,10 +1,24 @@
 import { test, expect } from '@playwright/test';
-import { LoginPageMethods } from '../../AppPages/Login/LoginMethods';
+import PomManager from '../../Utilities/PomManager';
 
-test('Successfull Login', async ({ page }) => {
+let pm;
 
-const login = new LoginPageMethods(page);
-login.gotoPage();
-await login.login('standard_user', 'secret_sauce');
+test.describe('Login Tests', () => {
+
+    test.beforeEach(async ({ page }) => {
+        pm = new PomManager(page);
+    });
+
+    test('Successful Login @smoke', async () => {
+        await pm.LoginPageMethods.gotoPage();
+        await pm.LoginPageMethods.login('standard_user', 'secret_sauce');
+        //await expect(page.getByText("Products")).toBeVisible();
+    });
 
 });
+
+test.afterEach(async ({ page }) => {
+    page.close();
+    page.context().browser().close();
+    page.context().close(); 
+    })

@@ -1,6 +1,6 @@
-import { loginPageLocators } from '../../AppPages/Login/LoginLocators.js';
+import loginPageLocators from '../../AppPages/Login/LoginLocators.js';
 
-export class LoginPageMethods {
+export default class LoginPageMethods {
   constructor(page) {
     this.page = page;  
     this.locators = new loginPageLocators(page);
@@ -10,9 +10,17 @@ export class LoginPageMethods {
     await this.locators.usernameInput().fill(username);
     await this.locators.passwordInput().fill(password);
     await this.locators.loginButton().click();
+
+    //     await this.locators.usernameInput.fill(username);
+    // await this.locators.passwordInput.fill(password);
+    // await this.locators.loginButton.click();
   }
 
   async gotoPage() {
     await this.page.goto('https://www.saucedemo.com/');
+  }
+
+  async getPageTitle() {
+    return this.page.title(); //may be add await if fails
   }
 }
