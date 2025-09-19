@@ -12,13 +12,9 @@ test.describe('Login Tests', () => {
     test('Successful Login @smoke', async () => {
         await pm.LoginPageMethods.gotoPage();
         await pm.LoginPageMethods.login('standard_user', 'secret_sauce');
-        //await expect(page.getByText("Products")).toBeVisible();
+        await pm.LoginPageMethods.Moonch();
+        await expect(pm.HomePageMethods.homePageTitle()).toHaveText("Products");
     });
 
 });
 
-test.afterEach(async ({ page }) => {
-    page.close();
-    page.context().browser().close();
-    page.context().close(); 
-    })
