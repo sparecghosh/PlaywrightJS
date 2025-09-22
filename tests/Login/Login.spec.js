@@ -10,10 +10,10 @@ test.describe('Login Tests', () => {
     });
 
     test('Successful Login @smoke', async () => {
-        await pm.LoginPageMethods.gotoPage();
-        await pm.LoginPageMethods.login('standard_user', 'secret_sauce');
-        await pm.LoginPageMethods.Moonch();
-        await expect(pm.HomePageMethods.homePageTitle()).toHaveText("Products");
+    await pm.NavigationHelper.gotoLoginPage();
+    await pm.LoginPageMethods.login('standard_user', 'secret_sauce');
+    await pm.LoginPageMethods.Moonch();
+    await pm.HomePageMethods.verifyHomePageLoaded();
     });
 
 });

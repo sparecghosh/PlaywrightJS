@@ -8,18 +8,11 @@ export default class loginPageMethods {
   }
 
   async login(username, password) {
-    await this.locators.usernameInput().fill(username);
-    await this.locators.passwordInput().fill(password);
-    await this.locators.loginButton().click();
-
-    //     await this.locators.usernameInput.fill(username);
-    // await this.locators.passwordInput.fill(password);
-    // await this.locators.loginButton.click();
+  await this.locators.usernameInput().fill(username);
+  await this.locators.passwordInput().fill(password);
+  await this.locators.loginButton().click();
   }
 
-  async gotoPage() {
-    await this.page.goto('https://www.saucedemo.com/');
-  }
 
   async getPageTitle() {
     return this.page.title(); //may be add await if fails
