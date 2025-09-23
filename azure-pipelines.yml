@@ -1,11 +1,13 @@
 trigger:
-  - main  # or master, depending on your branch
+  - main 
 
 pool:
   name: AGSelfHosted
 
 steps:
   - checkout: self
+    clean: true
+    fetchDepth: 0
     displayName: 'Checkout latest from Git'
 
   - task: NodeTool@0
