@@ -13,11 +13,36 @@ steps:
       versionSpec: '18.x'
     displayName: 'Install Node.js'
 
-  - script: npm install
+  - script: |
+      npm install
     displayName: 'Install dependencies'
+    env:
+      CI: true # This explicitly sets the CI variable for the next steps
 
   - script: npx playwright install --with-deps
     displayName: 'Install Playwright browsers'
+    env:
+      CI: true
 
   - script: npx playwright test
     displayName: 'Run Playwright tests'
+    env:
+      CI: true
+      PLAYWRIGHT_WORKERS: 1
+      # Enable verbose Playwright logs to see more detail
+      DEBUG: 'pw:api'
+
+  - task: PublishTestResults@2
+    displayName: 'Publish Playwright Test Results'
+    inputs:
+      testResultsFormat: 'JUnit'
+      testResultsFiles: '**/results.xml'
+      testRunTitle: 'Playwright Tests'
+
+  - task: PublishPipelineArtifact@1
+    displayName: 'Publish Playwright Report'
+    inputs:
+      targetPath: 'playwright-report'
+      artifact: 'playwright-report'
+      publishLocation: 'pipeline'
+    condition: always() # Always publish the report, even if tests fail
