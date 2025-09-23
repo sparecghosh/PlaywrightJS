@@ -1,10 +1,13 @@
 trigger:
-  - main   # or master, depending on your branch
+  - main  # or master, depending on your branch
 
 pool:
   name: AGSelfHosted
 
 steps:
+  - checkout: self
+    displayName: 'Checkout latest from Git'
+
   - task: NodeTool@0
     inputs:
       versionSpec: '18.x'
