@@ -2,7 +2,7 @@ trigger:
   - main   # or master, depending on your branch
 
 pool:
-  vmImage: 'ubuntu-latest'
+  name: AGSelfHosted
 
 steps:
   - task: NodeTool@0
