@@ -48,3 +48,7 @@ steps:
       artifact: 'playwright-report'
       publishLocation: 'pipeline'
     condition: always() # Always publish the report, even if tests fail
+
+  - script: npx playwright test --last-failed
+    displayName: 'Re-run only failed tests'
+    condition: failed()
