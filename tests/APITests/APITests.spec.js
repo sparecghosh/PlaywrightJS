@@ -33,7 +33,7 @@ test("Post request", async ({ request }) => {
     }
 
     const response = await request.post("https://reqres.in/api/users", {
-        //data: payload, headers: { "x-api-key": "reqres-free-v1" } // Passing API key
+        data: payload, headers: { "x-api-key": "reqres-free-v1" } // Passing API key
     });
     const responseBody = response.json();
     console.log(await responseBody);
