@@ -25,18 +25,17 @@ steps:
     env:
       CI: true
 
-  - script: |
-      npx playwright test
-      echo "##vso[task.setvariable variable=TestStatus;]$?"
+  - script: npx playwright test
     displayName: 'Run Playwright tests'
     env:
       CI: true
       PLAYWRIGHT_WORKERS: 1
       RESULTS_FILE: results-first.xml
-   
+    continueOnError: true # This can be kept if you want the first run to not fail the whole pipeline
+
   - script: npx playwright test --last-failed
     displayName: 'Re-run only failed tests'
-    condition: eq(variables['TestStatus'], '1')   # 👈 only run if first run exited with error
+    condition: failed() # 👈 Use the built-in failed() function
     env:
       CI: true
       PLAYWRIGHT_WORKERS: 1
