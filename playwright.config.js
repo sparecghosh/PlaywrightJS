@@ -17,10 +17,10 @@ export default defineConfig({
 
   /* Reporters */
   reporter: [
-    ['list'], // logs in Azure Pipelines
-    ['html', { open: 'never', outputFolder: 'playwright-report' }], // static report
-    ['junit', { outputFile: 'results.xml' }], // JUnit XML for Azure DevOps
-  ],
+  ['list'],
+  ['html', { open: 'never', outputFolder: 'playwright-report' }],
+  ['junit', { outputFile: process.env.RESULTS_FILE || 'results.xml' }]
+],
 
   /* Shared settings for all the projects below. */
   use: {
