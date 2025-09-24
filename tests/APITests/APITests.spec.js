@@ -13,7 +13,7 @@ test("My First API Test", async ({ request }) => {
 
 test("Single user verification", async ({ request }) => {
     const response = await request.get("https://reqres.in/api/users/1", {
-        headers: { "x-api-key": "reqres-free-v1" }
+        //headers: { "x-api-key": "reqres-free-v1" }
     });
     const responseBody = response.json();
     console.log(await responseBody);
