@@ -33,7 +33,7 @@ steps:
       CI: true
       PLAYWRIGHT_WORKERS: 1
       RESULTS_FILE: results-first.xml
-    continueOnError: true
+    continueOnError: false
 
   - script: npx playwright test --last-failed
     displayName: 'Re-run only failed tests'
