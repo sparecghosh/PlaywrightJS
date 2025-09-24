@@ -1,61 +1,64 @@
 trigger:
-  - main 
+- main
 
 pool:
   name: AGSelfHosted
 
-steps:
-  - checkout: self
-    clean: true
-    fetchDepth: 0
-    displayName: 'Checkout latest from Git'
+jobs:
+- job: TestAndRerun
+  displayName: 'Run Playwright tests with a rerun'
+  steps:
+    - checkout: self
+      clean: true
+      fetchDepth: 0
+      displayName: 'Checkout latest from Git'
 
-  - task: NodeTool@0
-    inputs:
-      versionSpec: '18.x'
-    displayName: 'Install Node.js'
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '18.x'
+      displayName: 'Install Node.js'
 
-  - script: npm install
-    displayName: 'Install dependencies'
-    env:
-      CI: true
+    - script: npm install
+      displayName: 'Install dependencies'
+      env:
+        CI: true
 
-  - script: npx playwright install --with-deps
-    displayName: 'Install Playwright browsers'
-    env:
-      CI: true
+    - script: npx playwright install --with-deps
+      displayName: 'Install Playwright browsers'
+      env:
+        CI: true
 
-  - script: npx playwright test
-    displayName: 'Run Playwright tests'
-    env:
-      CI: true
-      PLAYWRIGHT_WORKERS: 1
-      RESULTS_FILE: results-first.xml
-    continueOnError: true # This can be kept if you want the first run to not fail the whole pipeline
+    # --- Your original test steps, now inside the job's `steps` section ---
+    - script: npx playwright test
+      displayName: 'Run Playwright tests'
+      env:
+        CI: true
+        PLAYWRIGHT_WORKERS: 1
+        RESULTS_FILE: results-first.xml
+      continueOnError: true
 
-  - script: npx playwright test --last-failed
-    displayName: 'Re-run only failed tests'
-    condition: failed() # 👈 Use the built-in failed() function
-    env:
-      CI: true
-      PLAYWRIGHT_WORKERS: 1
-      RESULTS_FILE: results-rerun.xml
+    - script: npx playwright test --last-failed
+      displayName: 'Re-run only failed tests'
+      condition: failed()
+      env:
+        CI: true
+        PLAYWRIGHT_WORKERS: 1
+        RESULTS_FILE: results-rerun.xml
 
-  # --- Publish merged results ---
-  - task: PublishTestResults@2
-    displayName: 'Publish Playwright Test Results'
-    inputs:
-      testResultsFormat: 'JUnit'
-      testResultsFiles: '**/results-*.xml'   # 👈 picks both first + rerun
-      mergeTestResults: true                 # 👈 merge into one run
-      testRunTitle: 'Playwright Tests'
-    condition: always()   # 👈 publish even if tests fail
+    # --- Your original publishing steps ---
+    - task: PublishTestResults@2
+      displayName: 'Publish Playwright Test Results'
+      inputs:
+        testResultsFormat: 'JUnit'
+        testResultsFiles: '**/results-*.xml'
+        mergeTestResults: true
+        testRunTitle: 'Playwright Tests'
+      condition: always()
 
-  # --- Publish HTML report as artifact ---
-  - task: PublishPipelineArtifact@1
-    displayName: 'Publish Playwright Report'
-    inputs:
-      targetPath: 'playwright-report'
-      artifact: 'playwright-report'
-      publishLocation: 'pipeline'
-    condition: always()
+    - task: PublishPipelineArtifact@1
+      displayName: 'Publish Playwright Report'
+      inputs:
+        targetPath: 'playwright-report'
+        artifact: 'playwright-report'
+        publishLocation: 'pipeline'
+      condition: always()
