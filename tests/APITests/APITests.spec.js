@@ -2,28 +2,17 @@ import { test, expect } from '@playwright/test';
 
 test("My First API Test", async ({ request }) => {
 
-    const response = await request.get("https://reqres.in/api/users?page=2");
-
-    const responseBody = response.json();
-
-    //console.log(await responseBody);    
-
+    const response = await request.get("https://jsonplaceholder.typicode.com/users");
+    const responseBody = await response.json();
     expect(response.status()).toBe(200);
 })
 
 test("Single user verification", async ({ request }) => {
-    const response = await request.get("https://reqres.in/api/users/1", {
-        //headers: { "x-api-key": "reqres-free-v1" }
-    });
-    const responseBody = response.json();
-    console.log(await responseBody);
-
-    // Assert user information
-
+    const response = await request.get("https://jsonplaceholder.typicode.com/users/1");
+    const responseBody = await response.json();
     expect(response.status()).toBe(200);
-    expect((await responseBody).data.id).toBe(1);
-    expect((await responseBody).data.first_name).toBe("George");
-    expect((await responseBody).data.last_name).toBe("Bluth");
+    expect(responseBody.id).toBe(1);
+    expect(responseBody.name).toBe("Leanne Graham");
 });
 
 test("Post request", async ({ request }) => {
