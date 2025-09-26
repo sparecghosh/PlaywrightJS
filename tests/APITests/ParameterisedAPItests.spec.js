@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { generateRandomData } from '../../Utilities/MacbookDataGenerator';
-const laptopTemplate = require('./LaptopTemplate.json');
+const laptopTemplate = require('../../Utilities/LaptopTemplate.json');
 
 const BASE_URL = 'https://api.restful-api.dev/objects';
 

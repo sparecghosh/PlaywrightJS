@@ -1,29 +1,12 @@
-<testsuites id="" name="" tests="7" failures="0" skipped="0" errors="0" time="5.242927999999374">
-<testsuite name="APITests\APITests.spec.js" timestamp="2025-09-26T10:36:14.916Z" hostname="chromium" tests="3" failures="0" skipped="0" time="0.592" errors="0">
-<testcase name="My First API Test" classname="APITests\APITests.spec.js" time="0.453">
+<testsuites id="" name="" tests="4" failures="0" skipped="0" errors="0" time="3.6775530000003056">
+<testsuite name="APITests\ParameterisedAPItests.spec.js" timestamp="2025-09-26T10:40:32.722Z" hostname="chromium" tests="4" failures="0" skipped="0" time="2.202" errors="0">
+<testcase name="RESTful API Parameterized Tests for MacBook Endpoint › POST: Create MacBook Object with random data" classname="APITests\ParameterisedAPItests.spec.js" time="0.719">
 </testcase>
-<testcase name="Single user verification" classname="APITests\APITests.spec.js" time="0.034">
+<testcase name="RESTful API Parameterized Tests for MacBook Endpoint › GET: Retrieve all MacBook Objects" classname="APITests\ParameterisedAPItests.spec.js" time="0.287">
 </testcase>
-<testcase name="Post request" classname="APITests\APITests.spec.js" time="0.105">
-<system-out>
-<![CDATA[{
-  name: [32m'Kishore QA'[39m,
-  job: [32m'Technical Consultant'[39m,
-  id: [32m'751'[39m,
-  createdAt: [32m'2025-09-26T10:36:16.430Z'[39m
-}
-]]>
-</system-out>
+<testcase name="RESTful API Parameterized Tests for MacBook Endpoint › PUT: Update MacBook Object with random data" classname="APITests\ParameterisedAPItests.spec.js" time="0.605">
 </testcase>
-</testsuite>
-<testsuite name="APITests\ParameterisedAPItests.spec.js" timestamp="2025-09-26T10:36:14.916Z" hostname="chromium" tests="4" failures="0" skipped="0" time="3.072" errors="0">
-<testcase name="RESTful API Parameterized Tests for MacBook Endpoint › POST: Create MacBook Object with random data" classname="APITests\ParameterisedAPItests.spec.js" time="0.756">
-</testcase>
-<testcase name="RESTful API Parameterized Tests for MacBook Endpoint › GET: Retrieve all MacBook Objects" classname="APITests\ParameterisedAPItests.spec.js" time="0.267">
-</testcase>
-<testcase name="RESTful API Parameterized Tests for MacBook Endpoint › PUT: Update MacBook Object with random data" classname="APITests\ParameterisedAPItests.spec.js" time="1.411">
-</testcase>
-<testcase name="RESTful API Parameterized Tests for MacBook Endpoint › DELETE: Delete MacBook Object" classname="APITests\ParameterisedAPItests.spec.js" time="0.638">
+<testcase name="RESTful API Parameterized Tests for MacBook Endpoint › DELETE: Delete MacBook Object" classname="APITests\ParameterisedAPItests.spec.js" time="0.591">
 </testcase>
 </testsuite>
 </testsuites>
